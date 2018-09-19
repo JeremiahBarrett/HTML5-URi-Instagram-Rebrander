@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://fiddle.jshell.net/JeremiahBarrett/7gp878rx/show/light/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Repost Canvas w/ Data URI Export</title>
+  
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="./dummy.js.download"></script>
+
+    <link rel="stylesheet" type="text/css" href="./result-light.css">
+
+  <style type="text/css">
+    .canvas4, #canvas4 {
+    //display:none;
+}
+  </style>
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">
+
+
+    window.onload=function(){
+      
+//
+CanvasRenderingContext2D.prototype.wrapText = function (text, x, y, maxWidth, lineHeight) {
+
+    var lines = text.split("\n");
+
+    for (var i = 0; i < lines.length; i++) {
+
+        var words = lines[i].split(' ');
+        var line = '';
+
+        for (var n = 0; n < words.length; n++) {
+            var testLine = line + words[n] + ' ';
+            var metrics = this.measureText(testLine);
+            var testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+                this.fillText(line, x, y);
+                line = words[n] + ' ';
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+
+        this.fillText(line, x, y);
+        y += lineHeight;
+    }
+};
+
+var c=document.getElementById("canvas4");
+var ctx=c.getContext("2d");
+     function loadImages(sources, callback) {
+        var images = {};
+        var loadedImages = 0;
+        var numImages = 0;
+        // get num of sources
+        for(var src in sources) {
+          numImages++;
+        }
+        for(var src in sources) {
+          images[src] = new Image();
+          images[src].onload = function() {
+            if(++loadedImages >= numImages) {
+              callback(images);
+            }
+          };
+          images[src].src = sources[src];
+        }
+      }
+      var canvas = document.getElementById('canvas4');
+      var context = canvas.getContext('2d');
+      var sources = {
+        darthVader: 'http://social.jbc.agency/wp-content/uploads/2015/08/sweet-frog-carytown1.jpg',
+        yoda: 'http://social.jbc.agency/instabrander/primohoagies/dresherpa/wp-content/uploads/2015/09/Instabrander-V1-V2bar.png',
+        logo: 'http://social.jbc.agency/wp-content/uploads/2015/08/11426648_674986512601247_1113465449_a.jpg'
+      };
+
+      loadImages(sources, function(images) {
+        
+        context.drawImage(images.darthVader, 0, 0, 640, 640);
+                    context.drawImage(images.logo, 55, 575, 40, 40);
+
+        context.drawImage(images.yoda, 0, 541, 640, 99);
+          
+        
+          //
+        context.RectBaseline = "middle";
+        ctx.fillStyle = '#000';
+        //ctx.fillRect(0,267.5,600,65);
+      	ctx.fill();
+        context.RectBaseline = "middle";
+        ctx.fillStyle = 'rgba(44, 44, 44, 0.5)';
+        //ctx.fillRect(0,0,600,500);
+      	ctx.fill();
+          //
+        ctx.beginPath
+        ctx.font="20px Roboto"; 
+        ctx.fillStyle = "#FFF";
+      ctx.fillText("sweetfrogrosedale", 100, 595); 
+        ctx.fill();
+        //
+          //
+        ctx.beginPath
+        ctx.font="20px Arial"; 
+        ctx.textAlign='center';
+        ctx.fillStyle = "#FFF";
+        //ctx.fillText("The five words go here", 300, 320); 
+        ctx.fill();
+          //
+          ctx.fillStyle = "white";
+ctx.font = "28px Arial";
+ctx.textBaseline = "middle";
+//ctx.wrapText("Headline goes here.",300,200,500,26);
+          //
+          
+          ctx.fillStyle = "white";
+ctx.font = "20px Arial";
+ctx.textBaseline = "middle";
+//ctx.wrapText("Here is the description of the article. We have formatted it for readability. Unless you think otherwise.",300,300,450,24);
+          //
+var canvas = document.getElementById("canvas4");
+var dataURL = canvas.toDataURL();
+console.log(dataURL);
+document.getElementById("canvas").src = (dataURL);
+
+          });
+
+
+    }
+
+</script>
+
+</head>
+<body>
+  <canvas id="canvas4" style="position: absolute; left: 0; top: 0; z-index: 1;" width="640" height="640"></canvas>
+<img id="canvas" src="https://fiddle.jshell.net/JeremiahBarrett/7gp878rx/show/light/">
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "7gp878rx"
+      }], "*")
+    }
+  </script>
+
+
+</body></html>
